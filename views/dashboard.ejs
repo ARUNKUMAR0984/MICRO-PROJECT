@@ -1,0 +1,155 @@
+<!-- dashboard.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <!-- Add your styles or include a stylesheet -->
+  <style>
+    /* Add your custom styles here */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #4CAF50;
+      font-size: 30px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .chat-container {
+      max-width: 800px;
+      width: 100%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      overflow: hidden;
+      margin-top: 20px;
+      background-color: #f9f9f9;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .chat-header {
+      text-align: center;
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .connected-users {
+      font-size: 18px;
+      color: #4CAF50;
+    }
+
+    .chat-messages {
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 10px;
+      background-color: #f2f2f2;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .message.sent {
+      align-items: flex-end;
+    }
+
+    .message .user {
+      font-weight: bold;
+      color: #4CAF50;
+      margin-right: 8px;
+    }
+
+    .message .text {
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      max-width: 70%;
+      word-wrap: break-word;
+    }
+
+    .message.sent .text {
+      color: #ffffff;
+      background-color: #63c366;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Dashboard, <%= Username %></h1>
+  <div class="chat-container">
+    <div class="chat-header">One-on-One Chat</div>
+    <div class="connected-users">
+      <h2>Connected Users:</h2>
+      <ul id="userList"></ul>
+    </div>
+    <div class="chat-messages" id="chat"></div>
+    <div class="chat-input">
+      <input type="text" class="input-field" id="text" placeholder="Type your message" required>
+      <button type="button" id="send-button" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+
+  <script>
+    const socket = io();
+    const user = '<%= Username %>'; // Get the username from the server
+
+    socket.emit('join', user);
+
+    socket.on('updateConnectedUsers', (users) => {
+      const userList = document.getElementById('userList');
+      userList.innerHTML = '';
+      users.forEach(user => {
+        const listItem = document.createElement('li');
+        listItem.textContent = user;
+        userList.appendChild(listItem);
+      });
+    });
+
+    socket.on('chat message', (msg) => {
+      const chatContainer = $('#chat');
+      const isCurrentUser = msg.user === user;
+      const messageClass = isCurrentUser ? 'sent' : 'received';
+      const displayName = isCurrentUser ? 'You' : msg.user;
+
+      const messageHtml = `
+        <div class="message ${messageClass}">
+          <span class="user">${displayName}:</span>
+          <span class="text">${msg.text}</span>
+        </div>`;
+
+      chatContainer.append(messageHtml);
+      chatContainer.scrollTop(chatContainer[0].scrollHeight);
+    });
+
+    function sendMessage() {
+      const text = $('#text').val();
+      socket.emit('chat message', { user, text });
+      $('#text').val('');
+    }
+  </script>
+</body>
+</html>
