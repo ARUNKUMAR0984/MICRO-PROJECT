@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
     <link rel="icon" href="images/KARE_EDUSYNC_LOGO.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -19,91 +20,127 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(rgb(255, 208, 208), rgb(143, 231, 251));
+            font-family: Arial, sans-serif;
         }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            /* Adjust the value as needed */
-            padding-bottom: 100px;
-            font-weight: 1000;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 50px;
-            color: black;
+        .form {
+            width: 320px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .form:hover {
+            transform: translateY(-5px);
+        }
+
+        .form img {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 100%;
+            height: auto;
         }
 
         h2 {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 24px;
+            color: #333;
         }
 
         form {
-            width: 300px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid black;
-            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
         }
 
         .form-groups {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .form-groups label {
-            display: block;
             font-weight: bold;
             margin-bottom: 5px;
-            color: #000000;
+            color: #333;
         }
 
         .form-groups input {
-            width: 100%;
-            padding: 8px;
+            padding: 10px;
             font-size: 16px;
-            border: 1px solid black;
-            border-radius: 3px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-groups input:focus {
+            outline: none;
+            border-color: dodgerblue;
         }
 
         .submit-btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: blue;
-            color: white;
+            padding: 12px;
+            background-color: dodgerblue;
+            color: #fff;
             border: none;
             border-radius: 5px;
+            font-size: 16px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         .submit-btn:hover {
-            background-color: blueviolet;
+            background-color: #0056b3;
         }
 
         p {
             margin-top: 10px;
-            font-size: small;
+            font-size: 14px;
+            text-align: center;
         }
 
         .sign-btn {
-            padding: 5px;
+            display: inline-block;
+            padding: 5px 10px;
             background-color: rgb(155, 178, 255);
-            color: black;
+            color: #333;
             cursor: pointer;
             border: none;
-            border-radius: 2px;
+            border-radius: 3px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .sign-btn:hover {
+            background-color: rgb(110, 138, 255);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #333;
+            font-size: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: dodgerblue;
         }
     </style>
-
 </head>
 
 <body>
-
-
-
     <div class="form">
-        <img src="images/KARE_EDUSYNC.png" alt="" height="150px" width="340px">
-
-
+        <img src="images/KARE_EDUSYNC.png" alt="KARE EDUSYNC Logo" height="150px" width="340px">
         <h2>LOGIN</h2>
         <form action="/login" method="post" onsubmit="emitSocketId(event)">
             <div class="form-groups">
@@ -116,32 +153,16 @@
                 <input type="password" id="password" name="password" placeholder="Enter your password" required
                     autocomplete="off">
             </div>
-
-            <button type="submit" class="submit-btn ">LOGIN</button>
-            <p>Don't have an account? <a href="/signup">SignUp</a></p>
+            <button type="submit" class="submit-btn">LOGIN</button>
+            <p>Don't have an account? <a href="/signup" class="sign-btn">SignUp</a></p>
         </form>
-
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-google"></i></a>
+        </div>
     </div>
-
-    <!-- ... Your existing HTML code ... -->
-
-    <!-- Include Socket.io -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-
-    <!-- Add the Socket ID Emitting Script -->
-    <script>
-        const socket = io();
-
-        function emitSocketId(event) {
-            event.preventDefault(); // Prevent form submission
-
-            const phoneNumber = document.getElementById('userPhoneNumber').value;
-            socket.emit('storeSocketId', phoneNumber); // Ensure it's emitted as a string
-
-            // Continue with the form submission if needed
-            event.target.submit();
-        }
-    </script>
 </body>
 
 </html>
