@@ -4,96 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIGNUP</title>
-    <style>*{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body{
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(rgb(255, 208, 208),rgb(143, 231, 251)
-        );
-        
-    }
-    
-    h1 {
-        text-align: center;
-        margin-bottom: 20px; /* Adjust the value as needed */
-        padding-bottom: 100px;   
-        font-weight: 1000;
-        font-family:'Times New Roman', Times, serif;
-        font-size: 50px;
-        color: black;
-    }
-    
-    h2 {
-        text-align: center;
-        margin-bottom: 10px;
-        
-    }
-    
-    
-    form{
-        width: 300px;
-        margin: 0 auto;
-    
-        padding: 20px;
-        border: 1px solid black;
-        border-radius: 5px;
-    }
-    
-    .form-groups{
-        margin-bottom: 15px;
-    
-    }
-    .form-groups label{
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-        color: #000000;
-    }
-    
-    .form-groups input{
-        width: 100%;
-        padding: 8px;
-        font-size: 16px;
-        border: 1px solid black;
-        border-radius: 3px;
-    }
-    
-    .submit-btn{
-        display: block;
-        width: 100%;
-        padding: 10px;
-        background-color: blue;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    
-    .submit-btn :hover{
-        background-color: blueviolet;
-    }
-    
-    p{
-        margin-top: 10px;
-        font-size: small;
-    }
-    
-    .sign-btn{
-        
-        padding: 5px;
-        background-color: rgb(155, 178, 255);
-        color: black;
-        cursor: pointer;
-        border: none;
-        border-radius: 2px;
-    }</style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgb(255, 208, 208), rgb(143, 231, 251));
+            font-family: Arial, sans-serif;
+        }
+
+        .form {
+            width: 400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .form:hover {
+            transform: translateY(-5px);
+        }
+
+        .form img {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 24px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-groups {
+            margin-bottom: 20px;
+        }
+
+        .form-groups label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-groups input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-groups input:focus {
+            outline: none;
+            border-color: dodgerblue;
+        }
+
+        .submit-btn {
+            padding: 12px;
+            background-color: dodgerblue;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .sign-btn {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: rgb(155, 178, 255);
+            color: #333;
+            cursor: pointer;
+            border: none;
+            border-radius: 3px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .sign-btn:hover {
+            background-color: rgb(110, 138, 255);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #333;
+            font-size: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: dodgerblue;
+        }
+    </style>
     <link rel="icon"  href="images/KARE_EDUSYNC_LOGO.png" type="image/png" >
    </head>
 <body>
@@ -115,12 +154,12 @@
             </div>
 
             <div class="form-groups">
-                <label for="phonenumber">PhoneNumber:</label>
+                <label for="phonenumber">PHONE NUMBER:</label>
                 <input type="phonenumber" id="phonenumber" name="phonenumber" placeholder="Enter your phonenumber" required autocomplete="oFF">
             </div>
 
             <button type="submit" class="submit-btn">SIGNUP</button>
-            <p>Already have an account? <a href="/login">Login</a></p>
+            <p>Already have an account? <a href="/login" class="sign-btn">Login</a></p>
         </form>
     </div>
 </body>
